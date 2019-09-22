@@ -1,0 +1,31 @@
+version: '2.1'
+services:
+  database:
+    image: mysql:5.7
+    container_name: tiktok-mysql
+    volumes:
+        - ./dbData/:/var/lib/mysql
+        - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+        - "MYSQL_DATABASE=${DB_DATABASE}"
+        - "MYSQL_USER=${DB_USERNAME}"
+        - "MYSQL_PASSWORD=${DB_PASSWORD}"
+        - "MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}"
+    ports:
+        - "33066:3306"
+    entrypoint:
+      sh -c "
+        echo 'CREATE DATABASE IF NOT EXISTS tiktok; CREATE DATABASE IF NOT EXISTS tiktok_test;' > /docker-entrypoint-initdb.d/init.sql;
+        /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+
+  scraper:
+    container_name: tiktok-scraper
+    build:
+        context: .
+        dockerfile: Dockerfile
+    volumes:
+        - .:/var/www/html
+    ports:
+        - "4002:80"
+    depends_on:
+        - database

@@ -1,0 +1,4 @@
+/vendor
+/dbData
+composer.phar
+.phpunit.result.cache

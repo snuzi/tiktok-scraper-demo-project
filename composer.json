@@ -1,0 +1,30 @@
+{
+    "name": "Sabri/tiktok",
+    "type": "App",
+    "description" : "sabri/tiktok is demo project",
+    "keywords": ["php", "tiktok"],
+    "homepage" : "http://github.com/snuzi",
+    "authors": [
+        {
+            "name" : "Sabri Nuzi",
+            "email" : "sabrinuzi@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^8",
+        "mockery/mockery": "^1.2"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "illuminate/database": "^6.0",
+        "vlucas/phpdotenv": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "sabri\\tiktok\\": "src"
+        },
+        "classmap": [
+            "src/models"
+        ]
+    }
+}
