@@ -55,16 +55,36 @@ class TikTokApi {
 
         $extraParams = [
             'user_id' => $uid,
-            //'max_cursor' => 0,
+            'max_cursor' => 0,
             'type' => 0,
-            'count' => 10,
-            'pull_type' => 1
+            'count' => 20,
         ];
 
         $content = $this->request(
             'aweme/v1/aweme/post/', 
             $extraParams
         );
+
+        $moreContent = [];
+
+        // Pagination for user's videos
+        while (isset($content['max_cursor']) && $content['has_more'] == 1) {
+            $extraParams['max_cursor'] = $content['max_cursor'];
+
+            $moreContent = $this->request(
+                'aweme/v1/aweme/post/', 
+                $extraParams
+            );
+
+            if ($moreContent) {
+                $content['has_more'] = $moreContent['has_more'];
+                $content['max_cursor'] = $moreContent['max_cursor'];
+                $content['min_cursor'] = $moreContent['min_cursor'];
+                $content['aweme_list'] = array_merge($content['aweme_list'], $moreContent['aweme_list']);
+            } else {
+                break;
+            }
+        }
 
         return $content;
     }

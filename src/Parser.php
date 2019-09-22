@@ -40,7 +40,8 @@ class Parser {
             }
         }
         if (!$url) {
-            throw new \Exception('Couldn\'t find source URL');
+            // TODO Investigate why some url does not work;
+            $url = $sourceUrls[0];
         }
         $post->uploadData = $url;
 
