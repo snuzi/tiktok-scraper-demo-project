@@ -1,7 +1,7 @@
 {
-    "name": "Sabri/tiktok",
+    "name": "sabri/demo/tiktok",
     "type": "App",
-    "description" : "sabri/tiktok is demo project",
+    "description" : "demo/demo/tiktok is demo project",
     "keywords": ["php", "tiktok"],
     "homepage" : "http://github.com/snuzi",
     "authors": [
@@ -17,14 +17,21 @@
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "illuminate/database": "^6.0",
-        "vlucas/phpdotenv": "^3.6"
+        "vlucas/phpdotenv": "^3.6",
+        "sabri/tiktok" : "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "sabri\\tiktok\\": "src"
+            "sabri\\demo\\tiktok\\": "src"
         },
         "classmap": [
             "src/models"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/snuzi/tiktok-scraper-php"
+        }
+    ]
 }

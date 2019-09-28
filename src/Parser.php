@@ -1,10 +1,10 @@
 <?php
 
-namespace sabri\tiktok;
+namespace sabri\demo\tiktok;
 
-use sabri\tiktok\models\Post;
-use sabri\tiktok\models\SocialUser;
-use sabri\tiktok\exceptions\UserProfileException;
+use sabri\demo\tiktok\models\Post;
+use sabri\demo\tiktok\models\SocialUser;
+use sabri\demo\tiktok\exceptions\UserProfileException;
 
 class Parser {
     /**

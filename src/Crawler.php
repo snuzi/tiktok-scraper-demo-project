@@ -1,13 +1,13 @@
 <?php
 
-namespace sabri\tiktok;
+namespace sabri\demo\tiktok;
 
-use sabri\tiktok\scraper\TikTokApi;
-use sabri\tiktok\models\Post;
-use sabri\tiktok\models\SocialUser;
-use sabri\tiktok\scraper\exceptions\LoginRequiredException;
-use sabri\tiktok\scraper\exceptions\InvalidResponseException;
-use sabri\tiktok\scraper\exceptions\EmptyResponseException;
+use sabri\demo\tiktok\scraper\TikTokApi;
+use sabri\demo\tiktok\models\Post;
+use sabri\demo\tiktok\models\SocialUser;
+use sabri\demo\tiktok\scraper\exceptions\LoginRequiredException;
+use sabri\demo\tiktok\scraper\exceptions\InvalidResponseException;
+use sabri\demo\tiktok\scraper\exceptions\EmptyResponseException;
 use Exception;
 
 /**

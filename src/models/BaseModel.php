@@ -1,6 +1,6 @@
 <?php
 
-namespace sabri\tiktok\models;
+namespace sabri\demo\tiktok\models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 

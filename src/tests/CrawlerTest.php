@@ -1,11 +1,11 @@
 <?php
 namespace tests;
 use PHPUnit\Framework\TestCase;
-use sabri\tiktok\Crawler;
-use sabri\tiktok\Parser;
-use sabri\tiktok\scraper\TikTokApi;
-use sabri\tiktok\models\Post;
-use sabri\tiktok\models\SocialUser;
+use sabri\demo\tiktok\Crawler;
+use sabri\demo\tiktok\Parser;
+use sabri\demo\tiktok\scraper\TikTokApi;
+use sabri\demo\tiktok\models\Post;
+use sabri\demo\tiktok\models\SocialUser;
 use Exception;
 use \Mockery;
 

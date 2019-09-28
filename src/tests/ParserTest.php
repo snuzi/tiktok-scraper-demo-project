@@ -1,10 +1,10 @@
 <?php
 namespace tests;
 use PHPUnit\Framework\TestCase;
-use sabri\tiktok\Parser;
+use sabri\demo\tiktok\Parser;
 use Exception;
-use sabri\tiktok\models\Post;
-use sabri\tiktok\models\SocialUser;
+use sabri\demo\tiktok\models\Post;
+use sabri\demo\tiktok\models\SocialUser;
 
 class ParserTest extends TestCase
 {

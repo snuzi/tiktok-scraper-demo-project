@@ -4,5 +4,5 @@ include_once __DIR__.'/../../vendor/autoload.php';
 require __DIR__ . '/../config/db.php';
 
 // Remove all current data in test database
-\sabri\tiktok\models\Post::truncate();
-\sabri\tiktok\models\SocialUser::truncate();
+\sabri\demo\tiktok\models\Post::truncate();
+\sabri\demo\tiktok\models\SocialUser::truncate();
