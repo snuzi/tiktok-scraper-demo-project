@@ -2,12 +2,12 @@
 
 namespace sabri\demo\tiktok;
 
-use sabri\demo\tiktok\scraper\TikTokApi;
+use sabri\tiktok\TikTokApi;
 use sabri\demo\tiktok\models\Post;
 use sabri\demo\tiktok\models\SocialUser;
-use sabri\demo\tiktok\scraper\exceptions\LoginRequiredException;
-use sabri\demo\tiktok\scraper\exceptions\InvalidResponseException;
-use sabri\demo\tiktok\scraper\exceptions\EmptyResponseException;
+use sabri\tiktok\exceptions\LoginRequiredException;
+use sabri\tiktok\exceptions\InvalidResponseException;
+use sabri\tiktok\exceptions\EmptyResponseException;
 use Exception;
 
 /**

@@ -3,7 +3,7 @@ namespace tests;
 use PHPUnit\Framework\TestCase;
 use sabri\demo\tiktok\Crawler;
 use sabri\demo\tiktok\Parser;
-use sabri\demo\tiktok\scraper\TikTokApi;
+use sabri\tiktok\TikTokApi;
 use sabri\demo\tiktok\models\Post;
 use sabri\demo\tiktok\models\SocialUser;
 use Exception;

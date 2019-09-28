@@ -33,5 +33,10 @@
             "type": "vcs",
             "url": "https://github.com/snuzi/tiktok-scraper-php"
         }
-    ]
+    ],
+    "scripts": {
+        "test": [
+            "phpunit --configuration phpunit.xml"
+        ]
+    }
 }
