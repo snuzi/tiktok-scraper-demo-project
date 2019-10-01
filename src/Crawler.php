@@ -170,13 +170,6 @@ class Crawler
     }
 
     /**
-     *
-     *
-     *
-     * @param string $user_id
-     */
-
-    /**
      * Use this to crawl a user's all videos
      * Videos are scrapped and saved in DB
      *
