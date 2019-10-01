@@ -2,3 +2,4 @@
 /dbData
 composer.phar
 .phpunit.result.cache
+.idea/
