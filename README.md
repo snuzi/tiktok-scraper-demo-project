@@ -20,6 +20,10 @@ Application container :
 Mysql container:  
 `docker exec -it tiktok-mysql bash`
 
+### Import dump 
+Import dump from host machine to database container
+`cat dump.sql | docker exec -i tiktok-mysql /usr/bin/mysql -u root --password=root tiktok`
+
 ### Export database
 Dump database from a container to your machine:
 `docker exec tiktok-mysql sh -c 'exec mysqldump tiktok -uroot -proot' > ~/tiktok.sql`
