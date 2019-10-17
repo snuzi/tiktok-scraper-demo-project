@@ -1,17 +1,37 @@
 <?php
 
-namespace sabri\tiktok;
+namespace sabri\demo\tiktok;
 
-use sabri\tiktok\models\Post;
-use sabri\tiktok\models\SocialUser;
-use sabri\tiktok\exceptions\UserProfileException;
+use sabri\demo\tiktok\exceptions\UserProfileException;
+use sabri\demo\tiktok\models\Post;
+use sabri\demo\tiktok\models\SocialUser;
 
-class Parser {
+class Parser
+{
+    /**
+     * Parse a user video objects comming from Tiktok APi
+     *
+     * @param array $object video list object
+     *
+     * @return Post[] Array of posts
+     */
+    public function parseUserVideos(array $object): array
+    {
+        $videos = $object['aweme_list'];
+        $videoList = [];
+
+        foreach ($videos as $videoObject) {
+            $videoList[] = $this->parseVideo($videoObject);
+        }
+
+        return $videoList;
+    }
+
     /**
      * Parse a video object comming from Tiktok APi
-     * 
+     *
      * @param array $video video object
-     * 
+     *
      * @return Post
      */
     public function parseVideo(array $video): Post
@@ -49,10 +69,28 @@ class Parser {
     }
 
     /**
+     * Parse a user list comming from Tiktok APi
+     *
+     * @param array $object user list from search user API endpoint
+     * @return SocialUser[] Array of social ussers
+     */
+    public function parseSearchUsers(array $list): array
+    {
+        /** @var SocialUser[] */
+        $userList = [];
+
+        foreach ($list as $user) {
+            $userList[] = $this->parseUser($user['user_info']);
+        }
+
+        return $userList;
+    }
+
+    /**
      * Parse a user object comming from Tiktok APi
-     * 
+     *
      * @param array $object user object
-     * 
+     *
      * @return SocialUser
      */
     public function parseUser(array $object): SocialUser
@@ -71,43 +109,5 @@ class Parser {
         $user->nrVideos = $object['aweme_count'];
 
         return $user;
-    }
-
-    /**
-     * Parse a user video objects comming from Tiktok APi
-     * 
-     * @param array $object video list object
-     * 
-     * @return Post[] Array of posts
-     */
-    public function parseUserVideos(array $object): array
-    {
-        $videos = $object['aweme_list'];
-        $videoList = [];
-
-        foreach ($videos as $videoObject) {
-            $videoList[] = $this->parseVideo($videoObject);
-        }
-
-        return $videoList;
-    }
-
-    /**
-     * Parse a user list comming from Tiktok APi
-     * 
-     * @param array $object user list from search user API endpoint
-     * 
-     * @return SocialUser[] Array of social ussers
-     */
-    public function parseSearchUsers(array $list): array
-    {
-        /** @var SocialUser[] */
-        $userList = [];
-
-        foreach ($list as $user) {
-            $userList[] = $this->parseUser($user['user_info']);
-        }
-
-        return $userList;
     }
 }

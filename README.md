@@ -64,16 +64,15 @@ then run tests:
 
 - `cronCrawlVideosInDb()` : This will re-crawl last 10 oldest videos from database. This can be a cron job task.
 
-## Tiktok scraper
-Tiktok scraper is found in the `src/scraper`
-### Tiktok API
-- `getUser($uid)` Returns user profile data. `$uid` is user's Tiktok unique id.
-- `getUserVideos($uid)` Returns a list of user videos. `$uid` is user's Tiktok unique id.
-- `searchUser($keyword)` Returns user search results.
-- `getVideo($uid)` Returns a video datails. `$uid` is video Tiktok unique id.
+### Tiktok scraper
+Tiktok scraper is found in [this repository](https://github.com/snuzi/tiktok-scraper-php) where Tiktok scraper API documentation the API documentation can also be found.
+
 
 ### Access database from host machine:
 `host` = `localhost`
+
 `port` = `33066`
+
 `username` = `root`
+
 `password` = `root`

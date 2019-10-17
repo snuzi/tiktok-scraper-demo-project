@@ -1,6 +1,6 @@
 <?php
 
-namespace sabri\tiktok\models;
+namespace sabri\demo\tiktok\models;
 
 /**
  * @property int $id
@@ -12,17 +12,17 @@ namespace sabri\tiktok\models;
  * @property integer $nrInteractions
  * @property integer $nrComments
  */
-class Post extends BaseModel {
-
-    protected $table = 'posts';
+class Post extends BaseModel
+{
 
     public $timestamps = true;
-
+    protected $table = 'posts';
 
     /**
      * returns the User that ownes this post
      */
-    public function user(){
+    public function user()
+    {
         return $this->hasOne(SocialUser::class, 'socialUserId');
     }
 }

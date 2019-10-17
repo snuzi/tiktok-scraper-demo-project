@@ -1,23 +1,19 @@
 <?php
+
 namespace tests;
+
+use Mockery;
 use PHPUnit\Framework\TestCase;
-use sabri\tiktok\Crawler;
-use sabri\tiktok\Parser;
-use sabri\tiktok\scraper\TikTokApi;
-use sabri\tiktok\models\Post;
-use sabri\tiktok\models\SocialUser;
-use Exception;
-use \Mockery;
+use sabri\demo\tiktok\Crawler;
+use sabri\demo\tiktok\models\Post;
+use sabri\demo\tiktok\models\SocialUser;
+use sabri\demo\tiktok\Parser;
+use sabri\tiktok\TikTokApi;
 
 class CrawlerTest extends TestCase
 {
     private $_crawler;
     private $_parser;
-
-    protected function setUp(): void
-    {
-        $this->_parser = new Parser();
-    }
 
     public function _testFindUserByUsername()
     {
@@ -34,6 +30,38 @@ class CrawlerTest extends TestCase
         $keyword = 'cristiano';
         $foundUser = $mockCrawler->getUserByUsername($keyword);
         $this->assertEquals($foundUser, null);
+    }
+
+    private function getData($type)
+    {
+        return json_decode(file_get_contents(__DIR__ . '/data/' . $type . '.txt'), true);
+    }
+
+    private function mockTiktok(array $mockFunctions)
+    {
+        $tiktokClientMock = Mockery::mock(TikTokApi::class, [['bla' => 'bla']])->makePartial();
+        foreach ($mockFunctions as $args) {
+            list($shouldRecieve, $withArgs, $andReturn) = $args;
+
+            $tiktokClientMock->shouldReceive($shouldRecieve)
+                ->withArgs($withArgs)
+                ->andReturn($andReturn);
+        }
+
+        return $tiktokClientMock;
+    }
+
+    private function mockCrawler($tiktokClientMock)
+    {
+        $crawlerMock = Mockery::mock(Crawler::class)->makePartial()
+            ->shouldAllowMockingProtectedMethods();
+
+        $crawlerMock->shouldReceive('getTiktokClient')
+            ->andReturn($tiktokClientMock)
+            ->shouldReceive('getParser')
+            ->andReturn(new Parser());
+
+        return $crawlerMock;
     }
 
     public function _testcrawlVideo()
@@ -54,9 +82,9 @@ class CrawlerTest extends TestCase
 
         // Test if same video is just updated not duplicated
         $updatedDesc = 'bla bla';
-     
+
         $data['aweme_detail']['desc'] = $updatedDesc;
-     
+
         $mockTiktok = $this->mockTiktok([['getPost', [$uid], $data]]);
         $mockCrawler = $this->mockCrawler($mockTiktok);
 
@@ -96,7 +124,7 @@ class CrawlerTest extends TestCase
 
         $videoUidToUpdate = $userVideosData['aweme_list'][0]['aweme_id'];
 
-        $userVideosData['aweme_list'][0]['desc'] = $updateFirstVideoDescription; 
+        $userVideosData['aweme_list'][0]['desc'] = $updateFirstVideoDescription;
 
         $mockTiktok = $this->mockTiktok([
             ['getUser', [$uid], $userInfoData],
@@ -121,34 +149,8 @@ class CrawlerTest extends TestCase
         $this->assertEquals($updateFirstVideoDescription, $userPostUpdatedInDb->description);
     }
 
-    private function mockTiktok(array $mockFunctions)
+    protected function setUp(): void
     {
-        $tiktokClientMock = Mockery::mock(TikTokApi::class, [['bla' => 'bla']])->makePartial();
-        foreach ($mockFunctions as $args) {
-            list($shouldRecieve, $withArgs, $andReturn) = $args;
-        
-            $tiktokClientMock->shouldReceive($shouldRecieve)
-                ->withArgs($withArgs)
-                ->andReturn($andReturn);
-        }
-        
-        return $tiktokClientMock;
-    }
-
-    private function mockCrawler($tiktokClientMock)
-    {
-        $crawlerMock = Mockery::mock(Crawler::class)->makePartial()
-            ->shouldAllowMockingProtectedMethods();
-
-        $crawlerMock->shouldReceive('getTiktokClient')
-            ->andReturn($tiktokClientMock)
-            ->shouldReceive('getParser')
-            ->andReturn(new Parser());
-
-        return $crawlerMock;
-    }
-
-    private function getData($type) {
-        return json_decode(file_get_contents(__DIR__ . '/data/' . $type . '.txt'), true);
+        $this->_parser = new Parser();
     }
 }
