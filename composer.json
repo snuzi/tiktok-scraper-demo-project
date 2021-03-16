@@ -16,7 +16,7 @@
     },
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "illuminate/database": "^6.0",
+        "illuminate/database": "^6.20.14",
         "vlucas/phpdotenv": "^3.6",
         "sabri/tiktok" : "dev-master"
     },
